@@ -1,0 +1,23 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../app/_generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+
+model Absence {
+  id          String      @id @default(uuid())
+  player_name String   // Name of the player
+  reason      String?  // Nullable reason for absence
+  date        DateTime // Date of the absence
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+}
