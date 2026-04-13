@@ -2,10 +2,11 @@
 import { useState } from "react";
 import { AbsenceGraph } from "./_components/absence-graph";
 import { Modal } from "./_components/modal";
-import Form from "./_components/form";
+import { CreateAbsenceForm } from "./_components/form";
 
 export default function Home() {
   const [isVisible, setIsVisible] = useState(false)
+
   return (
     <div className="w-full h-dvh overflow-hidden flex flex-col">
       <div className="w-full flex items-center justify-center mt-10">
@@ -30,7 +31,7 @@ export default function Home() {
       </div>
 
       <Modal isVisible={isVisible} closeModal={() => setIsVisible(false)}>
-        <Form />
+        <CreateAbsenceForm />
       </Modal>
     </div>
   );

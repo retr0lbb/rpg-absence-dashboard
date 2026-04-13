@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Form: React.FC = () => {
+export function CreateAbsenceForm(){
   const [playerName, setPlayerName] = useState('');
   const [reason, setReason] = useState('');
   const [date, setDate] = useState('');
@@ -59,5 +59,3 @@ const Form: React.FC = () => {
     </form>
   );
 };
-
-export default Form;

@@ -9,6 +9,7 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
+import { useAbsencesData } from '../_hooks/get_absences';
 
 ChartJS.register(
   CategoryScale,
@@ -20,13 +21,21 @@ ChartJS.register(
 );
 
 export function AbsenceGraph() {
-  // Mock data
-  const absenceData = [
-    { name: 'Liz', count: 7 },
-    { name: 'John', count: 5 },
-    { name: 'Alice', count: 9 },
-    { name: 'Frank', count: 6 },
-  ];
+
+
+  const {data: unFormatedAbsenceData, error, isPending} = useAbsencesData()
+
+  if(error || isPending){
+    return "Not a word my man"
+  }
+
+
+  const absenceData = unFormatedAbsenceData.map((ab) => {
+    return{
+      count: ab._count.player_name,
+      name: ab.player_name
+    }
+  })
 
   const data = {
     labels: absenceData.map((item) => item.name), // X-Axis = Names
@@ -45,12 +54,15 @@ export function AbsenceGraph() {
     responsive: true,
     plugins: {
       legend: {
-        position: 'top',
+        position: "center",
       },
       title: {
-        display: true,
+        display: false,
         text: 'Absences Overview',
       },
+    },
+    onClick(event, elements, chart) {
+      console.log(elements)
     },
   };
 
