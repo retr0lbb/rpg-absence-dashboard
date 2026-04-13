@@ -3,13 +3,15 @@ import { useState } from "react";
 import { AbsenceGraph } from "./_components/absence-graph";
 import { Modal } from "./_components/modal";
 import { CreateAbsenceForm } from "./_components/form";
+import { ShowAbsencesForPlayer } from "./_components/show-absences";
 
 export default function Home() {
   const [isVisible, setIsVisible] = useState(false)
 
   return (
-    <div className="w-full h-dvh overflow-hidden flex flex-col">
-      <div className="w-full flex items-center justify-center mt-10">
+    <div className="w-full min-h-dvh overflow-x-hidden flex flex-col">
+      <div className="w-full min-h-dvh flex flex-col">
+        <div className="w-full flex items-center justify-center mt-10">
         <h1 className="text-3xl text-zinc-200">Grafico das <strong className="text-cyan-300">{"ramelações".toUpperCase()}</strong> que teve no rpg do Vitão.</h1>
       </div>
 
@@ -33,6 +35,9 @@ export default function Home() {
       <Modal isVisible={isVisible} closeModal={() => setIsVisible(false)}>
         <CreateAbsenceForm />
       </Modal>
+      </div>
+
+      <ShowAbsencesForPlayer />
     </div>
   );
 }

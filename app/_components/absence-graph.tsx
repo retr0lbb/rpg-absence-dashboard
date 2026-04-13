@@ -23,14 +23,14 @@ ChartJS.register(
 export function AbsenceGraph() {
 
 
-  const {data: unFormatedAbsenceData, error, isPending} = useAbsencesData()
+  const {data: unFormattedAbsenceData, error, isPending} = useAbsencesData()
 
   if(error || isPending){
     return "Not a word my man"
   }
 
 
-  const absenceData = unFormatedAbsenceData.map((ab) => {
+  const absenceData = unFormattedAbsenceData.map((ab) => {
     return{
       count: ab._count.player_name,
       name: ab.player_name
