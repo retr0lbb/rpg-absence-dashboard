@@ -1,17 +1,37 @@
+"use client"
+import { useState } from "react";
 import { AbsenceGraph } from "./_components/absence-graph";
+import { Modal } from "./_components/modal";
+import Form from "./_components/form";
 
 export default function Home() {
+  const [isVisible, setIsVisible] = useState(false)
   return (
-    <div className="w-full h-dvh">
+    <div className="w-full h-dvh overflow-hidden flex flex-col">
       <div className="w-full flex items-center justify-center mt-10">
-        <h1 className="text-3xl text-zinc-200">Grafico das ramelações que teve no rpg do Vitão.</h1>
+        <h1 className="text-3xl text-zinc-200">Grafico das <strong className="text-cyan-300">{"ramelações".toUpperCase()}</strong> que teve no rpg do Vitão.</h1>
       </div>
 
-      <div className="w-full h-full flex items-center justify-center gap-20">
-        <div className="flex flex-1 max-w-4/5">
+      <div className="w-full h-full flex flex-1 flex-col items-center justify-center gap-6">
+        <div className="flex w-full items-center justify-center">
           <AbsenceGraph />
         </div>
+
+        <div className="w-2/3 px-20">
+          <button className="px-5 py-2 bg-zinc-900 
+            text-xl border border-zinc-800 
+            rounded-md cursor-pointer text-zinc-200 
+            hover:bg-white/10 transition-all"
+            onClick={() => setIsVisible(true)}
+          >
+            Nova Ramelação
+           </button>
+         </div>
       </div>
+
+      <Modal isVisible={isVisible} closeModal={() => setIsVisible(false)}>
+        <Form />
+      </Modal>
     </div>
   );
 }

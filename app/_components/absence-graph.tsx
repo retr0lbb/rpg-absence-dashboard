@@ -5,8 +5,6 @@ import {
   CategoryScale,
   LinearScale,
   BarElement,
-  PointElement,
-  LineElement,
   Title,
   Tooltip,
   Legend,
@@ -57,7 +55,7 @@ export function AbsenceGraph() {
   };
 
   return (
-    <div className="w-full h-full">
+    <div className="w-full flex items-center justify-center h-150">
       <Bar data={data} options={options} />
     </div>
   );
