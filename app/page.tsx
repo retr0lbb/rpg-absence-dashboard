@@ -1,12 +1,18 @@
-"use client"
-import { Suspense, useState } from "react";
+import { Suspense } from "react";
 import { AbsenceGraph } from "./_components/absence-graph";
-import { Modal } from "./_components/modal";
-import { CreateAbsenceForm } from "./_components/form";
 import { ShowAbsencesForPlayer } from "./_components/show-absences";
+import { CreateAbsenceModal } from "./_components/create-absence-modal";
+import { getPlayersAbsenceData } from "./_actions/get-players-absence";
 
-export default function Home() {
-  const [isVisible, setIsVisible] = useState(false)
+export default async function Home({
+  searchParams
+}: {
+  searchParams: Promise<{ player?: string }>
+}) {
+
+  const params = await searchParams
+
+  const playerData = await getPlayersAbsenceData()
 
   return (
     <div className="w-full min-h-dvh overflow-x-hidden flex flex-col">
@@ -18,29 +24,17 @@ export default function Home() {
       <div className="w-full h-full flex flex-1 flex-col items-center justify-center gap-6">
         <div className="flex w-full items-center justify-center">
           <Suspense fallback={<p>Loading data...</p>}>
-            <AbsenceGraph />
+            <AbsenceGraph data={playerData} />
           </Suspense>
         </div>
 
-        <div className="w-2/3 px-20">
-          <button className="px-5 py-2 bg-zinc-900 
-            text-xl border border-zinc-800 
-            rounded-md cursor-pointer text-zinc-200 
-            hover:bg-white/10 transition-all"
-            onClick={() => setIsVisible(true)}
-          >
-            Nova Ramelação
-           </button>
-         </div>
-      </div>
+        <CreateAbsenceModal />
 
-      <Modal isVisible={isVisible} closeModal={() => setIsVisible(false)}>
-        <CreateAbsenceForm />
-      </Modal>
+      </div>
       </div>
 
       <Suspense fallback={<p>Loading data</p>}>
-        <ShowAbsencesForPlayer />
+        <ShowAbsencesForPlayer selectedPlayer={params.player} />
       </Suspense>
     </div>
   );

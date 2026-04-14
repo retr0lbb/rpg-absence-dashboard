@@ -9,7 +9,6 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
-import { useAbsencesData } from '../_hooks/get_absences';
 
 ChartJS.register(
   CategoryScale,
@@ -20,14 +19,17 @@ ChartJS.register(
   Legend
 );
 
-export function AbsenceGraph() {
+interface AbsenceGraphProps{
+  data: {
+    _count: {
+        player_name: number
+    },
+    player_name: string  
+  }[]
+}
 
 
-  const {data: unFormattedAbsenceData, error, isPending} = useAbsencesData()
-
-  if(error || isPending){
-    return "Not a word my man"
-  }
+export function AbsenceGraph({data: unFormattedAbsenceData}: AbsenceGraphProps) {
 
 
   const absenceData = unFormattedAbsenceData.map((ab) => {
