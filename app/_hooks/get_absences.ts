@@ -1,4 +1,5 @@
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useSuspenseQuery, useQueryClient } from "@tanstack/react-query";
+import { getPlayersAbsenceData } from "../_actions/get-players-absence";
 
 
 type AbsenceDataType = {
@@ -8,21 +9,15 @@ type AbsenceDataType = {
     player_name: string  
 }
 
-
 // Fetcher function to retrieve absence data
 const absenceFetcher = async () => {
-    const response = await fetch('/api/get-absence-data');
-
-    if (!response.ok) {
-        throw new Error(`Error fetching absence data: ${response.statusText}`);
-    }
-
-    return response.json() as Promise<AbsenceDataType[]>;
+    const data = await getPlayersAbsenceData()
+    return data as AbsenceDataType[]
 };
 
 // React Query hook for absence data
 export function useAbsencesData() {
-    return useQuery({
+    return useSuspenseQuery({
         queryKey: ["get-absence"],
         queryFn: absenceFetcher,
         staleTime: 5 * 60 * 1000, // Cache data as stale after 5 minutes

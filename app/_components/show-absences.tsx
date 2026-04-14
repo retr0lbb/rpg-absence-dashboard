@@ -30,8 +30,8 @@ export function ShowAbsencesForPlayer() {
     }
 
     function handlePlayerSelect(player: string) {
-    setSelectedPlayer(player)
-    setDropdownVisible(false)
+        setSelectedPlayer(player)
+        setDropdownVisible(false)
     }
 
     // 🔽 AGORA SIM pode ter returns

@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { AbsenceGraph } from "./_components/absence-graph";
 import { Modal } from "./_components/modal";
 import { CreateAbsenceForm } from "./_components/form";
@@ -17,7 +17,9 @@ export default function Home() {
 
       <div className="w-full h-full flex flex-1 flex-col items-center justify-center gap-6">
         <div className="flex w-full items-center justify-center">
-          <AbsenceGraph />
+          <Suspense fallback={<p>Loading data...</p>}>
+            <AbsenceGraph />
+          </Suspense>
         </div>
 
         <div className="w-2/3 px-20">
@@ -37,7 +39,9 @@ export default function Home() {
       </Modal>
       </div>
 
-      <ShowAbsencesForPlayer />
+      <Suspense fallback={<p>Loading data</p>}>
+        <ShowAbsencesForPlayer />
+      </Suspense>
     </div>
   );
 }
