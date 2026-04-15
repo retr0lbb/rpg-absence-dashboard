@@ -22,7 +22,7 @@ export function PlayerSelector({ players, selectedPlayer }: Props) {
         const params = new URLSearchParams(searchParams.toString())
         params.set("player", player)
 
-        router.push(`?${params.toString()}`)
+        router.push(`?${params.toString()}`, {scroll: false})
         setDropdownVisible(false)
     }
 

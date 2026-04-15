@@ -3,7 +3,11 @@ import {useState} from "react"
 import { Modal } from "./modal"
 import { CreateAbsenceForm } from "./form"
 
-export function CreateAbsenceModal(){
+
+interface CreateAbsenceModalProps {
+    names: string[]
+}
+export function CreateAbsenceModal({names}: CreateAbsenceModalProps){
     const [isVisible, setIsVisible] = useState(false)
 
 
@@ -21,7 +25,7 @@ export function CreateAbsenceModal(){
             </div>
         
             <Modal isVisible={isVisible} closeModal={() => setIsVisible(false)}>
-                <CreateAbsenceForm />
+                < CreateAbsenceForm players={names}/>
             </Modal>
         </>
     )

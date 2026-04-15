@@ -3,6 +3,7 @@ import { AbsenceGraph } from "./_components/absence-graph";
 import { ShowAbsencesForPlayer } from "./_components/show-absences";
 import { CreateAbsenceModal } from "./_components/create-absence-modal";
 import { getPlayersAbsenceData } from "./_actions/get-players-absence";
+import { getUserNames } from "./_actions/get-names";
 
 export default async function Home({
   searchParams
@@ -13,6 +14,9 @@ export default async function Home({
   const params = await searchParams
 
   const playerData = await getPlayersAbsenceData()
+  const names = await getUserNames()
+
+  const mappedNames = names.map(n => n.player_name)
 
   return (
     <div className="w-full min-h-dvh overflow-x-hidden flex flex-col">
@@ -28,7 +32,7 @@ export default async function Home({
           </Suspense>
         </div>
 
-        <CreateAbsenceModal />
+        <CreateAbsenceModal names={mappedNames} />
 
       </div>
       </div>
