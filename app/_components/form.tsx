@@ -7,7 +7,6 @@ import { NameSelectorInput } from "./select-names"
 export function CreateAbsenceForm({ players }: { players: string[] }) {
 
   const formRef = useRef<HTMLFormElement>(null)
-
   function handleTodayDate() {
     const today = new Date().toISOString().split("T")[0]
     if (formRef.current) {
@@ -18,7 +17,9 @@ export function CreateAbsenceForm({ players }: { players: string[] }) {
   return (
     <form
       ref={formRef}
-      action={savePlayerAbsence}
+      action={async(formData) => {
+        await savePlayerAbsence(formData)
+      }}
       className="flex flex-col gap-5 p-5"
     >
       <div className="w-full text-4xl font-medium text-zinc-200 py-4">
