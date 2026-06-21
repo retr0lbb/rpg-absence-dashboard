@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import { AbsenceGraph } from "./_components/absence-graph";
 import { ShowAbsencesForPlayer } from "./_components/show-absences";
 import { CreateAbsenceModal } from "./_components/create-absence-modal";
+import { LastSessionTimer } from "./_components/last-session-timer";
 import { getPlayersAbsenceData } from "./_actions/get-players-absence";
 import { getUserNames } from "./_actions/get-names";
 
@@ -31,6 +32,8 @@ export default async function Home({
 				</div>
 
 				<div className="w-full h-full flex flex-1 flex-col items-center justify-center gap-6">
+					<LastSessionTimer />
+
 					<div className="flex w-full items-center justify-center">
 						<Suspense fallback={<p>Loading data...</p>}>
 							<AbsenceGraph data={playerData} />
